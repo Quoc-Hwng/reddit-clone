@@ -1,17 +1,20 @@
+
 import { authModalState } from "@/src/atoms/authModalAtoms"
 import { Button, Flex, Input, Text } from "@chakra-ui/react"
 import { useState } from "react"
 import { useSetRecoilState } from "recoil"
-
-export default function Login(){
+// import {} from
+export default function SignUp() {
     const setAuthModalState = useSetRecoilState(authModalState)
-    const [loginForm, setLoginForm] = useState({
+    const [signForm, setSignUpForm] = useState({
         email: "",
         password: "",
+        confirmPassword: "",
     })
+    const 
     const onSubmit = () =>{}
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginForm((prev) =>({
+        setSignUpForm((prev) =>({
             ...prev,
             [event.target.name]: event.target.value,
         }))
@@ -59,19 +62,39 @@ export default function Login(){
                 }}
                 onChange={onChange} 
             />
+            <Input
+                name="confirmPassword"
+                placeholder="confirm password"
+                type="password"
+                mb={2}
+                fontSize="10pt"
+                _placeholder={{color: "gray.500"}}
+                _hover={{
+                    bg: "white",
+                    border: "1px solid",
+                    borderColor:"blue.500"
+                }}
+                _focus={{
+                    outline: "none",
+                    bg: "white",
+                    border: "1px solid",
+                    borderColor:"blue.500"
+                }}
+                onChange={onChange} 
+            />
             <Button
                 width="100%"
                 height="36px"
                 mt={2}
                 mb={2}
                 type="submit">
-                Login
+                Sign Up
             </Button>
             <Flex
                 fontSize="9pt"
                 justify="center"
             >
-                <Text mr={1}>New here?</Text>
+                <Text mr={1}>Already a Redditor?</Text>
                 <Text 
                     color="blue.500" 
                     fontWeight={700} 
@@ -79,11 +102,11 @@ export default function Login(){
                     onClick={() => 
                         setAuthModalState((prev) =>({
                         ...prev,
-                        view: "signup"
+                        view: "login"
                         }))
                     }
                 >
-                    SIGN UP
+                    LOG IN
                 </Text>
             </Flex>
         </form>

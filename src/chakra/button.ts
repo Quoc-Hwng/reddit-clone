@@ -6,7 +6,6 @@ export const Button = defineStyleConfig ({
         borderRadius: "60px",
         fontWeight: 700,
         fontSize: "10pt",
-        color:"red",
         _focus: {
             boxShadow: "none",
         },
