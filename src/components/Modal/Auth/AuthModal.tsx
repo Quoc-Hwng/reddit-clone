@@ -1,4 +1,5 @@
 import { authModalState } from '@/src/atoms/authModalAtoms'
+import { auth } from '@/src/firebase/clientApp';
 import {
     Button,
     Modal,
@@ -12,19 +13,24 @@ import {
     Flex,
     Text,
 } from '@chakra-ui/react'
+import { useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRecoilState } from 'recoil'
 import AuthInputs from './AuthInputs';
 import OAuthButtons from './OAuthButtons';
 export default function AuthModal() {
     const [modalState, setModalState] = useRecoilState(authModalState);
+    const [user, loading, error] = useAuthState(auth)
     const handleClose = () =>{
         setModalState(pre => ({
             ...pre,
             open: false,
         }))
     }
+    useEffect(() => {
+        if(user) handleClose()
+    },[user])
     return (
-        <>
             <Modal isOpen={modalState.open} onClose={handleClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -54,6 +60,6 @@ export default function AuthModal() {
                     </ModalBody>
                 </ModalContent>
             </Modal>
-        </>
+        
     )
 }
